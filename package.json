@@ -16,7 +16,6 @@
   },
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js",
-    "servidor": "nodemon index.js"
+    "start": "node index.js"
   }
 }
