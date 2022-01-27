@@ -3,14 +3,16 @@ const router = new Router();
 
 const {
   getFuncionario,
-  getFuncionariobyID
+  getFuncionariobyID,
+  postFuncionario
   
 } = require("../controlador/funcionario");
 
 
 // Rutas de funcionario
-router.get("/funcionario", getFuncionario);
+router.get("/funcionarios", getFuncionario);
 router.get("/funcionarioID/:id_funcionario", getFuncionariobyID);
+router.post("/funcionario", postFuncionario);
 
 
 

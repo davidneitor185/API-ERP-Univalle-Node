@@ -12,6 +12,7 @@ const getFuncionario= async (req, res) => {
 };
 
 const getFuncionariobyID = async (req, res) => {
+  
   const id_funcionario = req.params.id_funcionario;
   try {
     const response = await pool.query(
@@ -23,8 +24,30 @@ const getFuncionariobyID = async (req, res) => {
   }
 };
 
+const postFuncionario = async (req, res) => {
+  try {
+    const id_jefe = req.params.jefe_inmediato;
+    const nombre_funcionario = req.params.nombre_funcionario;
+    const email = req.params.email;
+    const depto_funcionario = req.params.depto_funcionario;
+   
+
+    const response = await pool.query(
+      `INSERT INTO public.funcionario(
+        jefe_inmediato, nombre_funcionario, email, depto_funcionario)
+        VALUES (${id_jefe}, ${nombre_funcionario} , ${email}, ${depto_funcionario})
+        returning id_Funcionario`
+    ); 
+    
+    res.send(response.rows);
+    
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 module.exports = {
   getFuncionario,
   getFuncionariobyID,
- 
+  postFuncionario
 };
