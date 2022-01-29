@@ -13,6 +13,10 @@ const {
   getCuentas
 } = require("../controlador/cuenta");
 
+const {
+  getSolicitudes,
+} = require("../controlador/solicitud");
+
 // Rutas de funcionario
 router.get("/funcionarios", getFuncionario);
 router.get("/funcionarioID/:id_funcionario", getFuncionariobyID);
@@ -22,5 +26,7 @@ router.post("/funcionario", postFuncionario);
 router.get("/cuenta/:email/:contrasena", getCuenta);
 router.get("/cuentas", getCuentas);
 
+// Rutas de Solicitudes
+router.get("/solicitudes", getSolicitudes);
 
 module.exports = router;
