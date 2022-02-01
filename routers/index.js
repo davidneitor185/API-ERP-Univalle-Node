@@ -22,6 +22,12 @@ const {
   getElemento
 } = require("../controlador/elemento");
 
+const {
+  putOrdenEstado, 
+  getOrdenes, 
+  getArtOrden
+} = require("../controlador/ordenes_c");
+
 // Rutas de funcionario
 router.get("/funcionarios", getFuncionario);
 router.get("/funcionarioID/:id_funcionario", getFuncionariobyID);
@@ -37,5 +43,10 @@ router.get("/solicitud/:id_solicitud", getSolicitud);
 
 //Rutas de Elementos
 router.get("/elemento/:id_solicitud", getElemento);
+
+//Rutas de Ordenes de compra
+router.put("/orden_c/:id_orden_compra/:estado", putOrdenEstado);
+router.get("/ordenes", getOrdenes);
+router.get("/orde_art/:id_orden_c", getArtOrden);
 
 module.exports = router;
