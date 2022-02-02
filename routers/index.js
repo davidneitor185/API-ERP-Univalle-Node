@@ -25,8 +25,11 @@ const {
 const {
   putOrdenEstado, 
   getOrdenes, 
-  getArtOrden
+  getArtOrden,
+  postOrdenCompra,
+  getOrdenBySolicitud
 } = require("../controlador/ordenes_c");
+const pool = require("../controlador/conexion");
 
 // Rutas de funcionario
 router.get("/funcionarios", getFuncionario);
@@ -48,5 +51,55 @@ router.get("/elemento/:id_solicitud", getElemento);
 router.put("/orden_c/:id_orden_compra/:estado", putOrdenEstado);
 router.get("/ordenes", getOrdenes);
 router.get("/orde_art/:id_orden_c", getArtOrden);
+router.get("/ordenCompraBySolci/:id_solicitud", getOrdenBySolicitud);
+router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total", postOrdenCompra);
+
+//Rutas de Jefe
+router.get("/jefe", async function(req, res) {
+  try {
+    const response = await pool.query(
+      'select * from jefe'
+    );
+    res.send(response.rows);
+  }catch(e) {
+    console.log(e);
+  }
+});
+
+//Rutas de ordenes de compra
+router.get("/ordenesCompra", async function(req, res) {
+  try {
+    const response = await pool.query(
+      'select * from orden_compra'
+    );
+    res.send(response.rows);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//Ruta para get de elementos
+router.get("/elemento", async function(req, res) {
+  try {
+    const response = await pool.query(
+      'select * from elemento'
+    );
+    res.send(response.rows);
+  } catch (e) {
+    console.log(e);
+  }
+})
+
+//Ruta de Ordenes de Articulo
+router.get("/ordenArticulo", async function(req, res) {
+  try {
+    const response = await pool.query(
+      'select * from orden_articulo'
+    );
+    res.send(response.rows);
+  } catch (e) {
+    console.log(e);
+  }
+})
 
 module.exports = router;
