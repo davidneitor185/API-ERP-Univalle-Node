@@ -15,20 +15,28 @@ const getOrdenesServicio = async (req, res) => {
 //Metodo PUSH para agregar ordenes de Servicio
 const PostOrdenesServicio = async (req, res) => {
     try {
+        //const {empleado, estado, comentarios, costo, cliente} = req.body;
         const empleadoAsignado = req.params.empleado;
         const estado = req.params.estado;
         const comentarios = req.params.comentarios;
         const costoTotal = req.params.costo;
         const cliente = req.params.cliente;
 
-        const response = await pool.query(
-            `insert into ordenservicio(empleadoasignado, estado, comentarios, costototal, cliente)
-                values (${empleadoAsignado}, ${estado}, ${comentarios}, ${costoTotal}, ${cliente})`
-        );
+        console.log("su papa");
 
-        res.send("Exito");
+        /*const response = await pool.query(
+            `INSERT INTO ordenservicio(empleadoasignado, estado, comentarios, costototal, cliente)
+                VALUES (3, 'En tramite', 'xdxdxd', 1234433, 2)`
+        );
+        /*const response = await pool.query(
+            `INSERT INTO ordenservicio (empleadoasignado, estado, comentarios, costototal, cliente)
+            VALUES ($1, $2, $3, $4, $5)`, [empleadoAsignado, estado, comentarios, costoTotal, cliente]
+        );*/
+
+        //res.send(response.rows);
     }catch(error) {
-        res.send("Error");
+        //res.send("Error");
+        console.log(error);
     }
 };
 
