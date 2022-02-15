@@ -63,6 +63,6 @@ router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitu
 
 //Rutas de Ordenes de Servicio
 router.get("/ordenesServicio", getOrdenesServicio);
-router.post("/crearServicio", PostOrdenesServicio);
+router.post("/crearServicio/:empleado/:estado/:comentarios/:costo/:cliente", PostOrdenesServicio);
 
 module.exports = router;
