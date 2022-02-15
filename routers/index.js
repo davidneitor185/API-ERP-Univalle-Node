@@ -31,7 +31,8 @@ const {
 } = require("../controlador/ordenes_c");
 
 const {
-  getOrdenesServicio
+  getOrdenesServicio,
+  PostOrdenesServicio
 } = require("../controlador/Ordenes_servicio");
 
 const pool = require("../controlador/conexion");
@@ -62,5 +63,6 @@ router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitu
 
 //Rutas de Ordenes de Servicio
 router.get("/ordenesServicio", getOrdenesServicio);
+router.post("/crearServicio", PostOrdenesServicio);
 
 module.exports = router;
