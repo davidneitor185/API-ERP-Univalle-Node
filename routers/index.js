@@ -15,11 +15,14 @@ const {
 
 const {
   getSolicitudes,
-  getSolicitud
+  getSolicitud,
+  putSolicitud,
+  postSolicitud
 } = require("../controlador/solicitud");
 
 const {
-  getElemento
+  getElemento,
+  getElementos
 } = require("../controlador/elemento");
 
 const {
@@ -43,9 +46,12 @@ router.get("/cuentas", getCuentas);
 // Rutas de Solicitudes
 router.get("/solicitudes", getSolicitudes);
 router.get("/solicitud/:id_solicitud", getSolicitud);
+router.put("/updatesolicitud/:id/:estado", putSolicitud);
+router.post("/postsolicitud", postSolicitud);
 
 //Rutas de Elementos
 router.get("/elemento/:id_solicitud", getElemento);
+router.get("/elementos", getElementos);
 
 //Rutas de Ordenes de compra
 router.put("/orden_c/:id_orden_compra/:estado", putOrdenEstado);

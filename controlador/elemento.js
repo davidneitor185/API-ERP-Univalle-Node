@@ -14,9 +14,19 @@ const pool = require("./conexion");
     }
   };
 
-
+  const getElementos= async (req, res) => {
+    try {
+      
+      const response = await pool.query(
+        `SELECT * FROM elemento`
+      );
+      res.send(response.rows);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
 module.exports = {
-  getElemento
-  
+  getElemento,
+  getElementos  
 };
