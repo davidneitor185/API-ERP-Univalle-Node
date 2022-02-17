@@ -22,7 +22,8 @@ const {
 
 const {
   getElemento,
-  getElementos
+  getElementos,
+  postelement
 } = require("../controlador/elemento");
 
 const {
@@ -52,6 +53,7 @@ router.post("/postsolicitud", postSolicitud);
 //Rutas de Elementos
 router.get("/elemento/:id_solicitud", getElemento);
 router.get("/elementos", getElementos);
+router.post("/postelement", postelement);
 
 //Rutas de Ordenes de compra
 router.put("/orden_c/:id_orden_compra/:estado", putOrdenEstado);

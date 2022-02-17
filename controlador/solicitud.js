@@ -54,7 +54,8 @@ const getSolicitudes= async (req, res) => {
       const response = await pool.query(
         `INSERT INTO public.solicitud_interna(
            justificacion, id_funcionario, tiempo_e, estado)
-          VALUES ( '${justificacion}', ${id_funcionario}, '${tiempo_e}', '${estado}')`
+          VALUES ( '${justificacion}', ${id_funcionario}, '${tiempo_e}', '${estado}')
+          RETURNING id_solicitud`
       );
       res.send(response.rows);
     } catch (e) {
