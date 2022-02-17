@@ -1,4 +1,5 @@
 const Router = require("express-promise-router");
+const bodyParser = require('body-parser');
 const router = new Router();
 
 const {
@@ -66,8 +67,9 @@ router.get("/ordenCompraBySolci/:id_solicitud", getOrdenBySolicitud);
 router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total", postOrdenCompra);
 
 //Rutas de Ordenes de Servicio
+const jsonParser = bodyParser.json();
 router.get("/ordenesServicio", getOrdenesServicio);
-router.post("/crearServicio", PostOrdenesServicio);
+router.post("/crearServicio", jsonParser, PostOrdenesServicio);
 
 //Rutas de Clientes
 router.get("/IDclientes", getClienteIDs);

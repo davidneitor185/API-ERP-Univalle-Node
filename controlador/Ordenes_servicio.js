@@ -1,5 +1,6 @@
 const pool = require('./conexion')
 
+
 //Metodo GET para listar las ordens de servicio
 const getOrdenesServicio = async (req, res) => {
     try {
@@ -14,19 +15,18 @@ const getOrdenesServicio = async (req, res) => {
 
 //Metodo PUSH para agregar ordenes de Servicio
 const PostOrdenesServicio = async (req, res) => {
-    try {
+    /*try {
         //const {empleado, estado, comentarios, costo, cliente} = req.body;
-        const empleadoAsignado = req.params.empleado;
-        const estado = req.params.estado;
-        const comentarios = req.params.comentarios;
-        const costoTotal = req.params.costo;
-        const cliente = req.params.cliente;
+        const empleadoAsignado = req.body.empleado;
+        const estado = req.body.estado;
+        const comentarios = req.body.comentarios;
+        const costoTotal = req.body.costo;
+        const cliente = req.body.cliente;
 
-        console.log("su papa");
 
-        /*const response = await pool.query(
+        const response = await pool.query(
             `INSERT INTO ordenservicio(empleadoasignado, estado, comentarios, costototal, cliente)
-                VALUES (3, 'En tramite', 'xdxdxd', 1234433, 2)`
+                VALUES (${empleadoAsignado}, ${estado}, ${comentarios}, ${costoTotal}, ${cliente})`
         );
         /*const response = await pool.query(
             `INSERT INTO ordenservicio (empleadoasignado, estado, comentarios, costototal, cliente)
@@ -34,10 +34,12 @@ const PostOrdenesServicio = async (req, res) => {
         );*/
 
         //res.send(response.rows);
-    }catch(error) {
+    /*}catch(error) {
         //res.send("Error");
         console.log(error);
-    }
+    }*/
+    console.log(req.body);
+    res.send("se ha creado una orden xdxdxd");
 };
 
 module.exports = {
