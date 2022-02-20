@@ -41,6 +41,10 @@ const {
   getClienteIDs
 } = require("../controlador/Clientes");
 
+const {
+  PostServiciosOS
+} = require("../controlador/ServiciosOS");
+
 const pool = require("../controlador/conexion");
 
 
@@ -76,5 +80,8 @@ router.delete("/borraOServicio/:id", DeleteOrdenesServicio);
 
 //Rutas de Clientes
 router.get("/IDclientes", getClienteIDs);
+
+//Rutas de Servicios
+router.post("/newServicios", PostServiciosOS);
 
 module.exports = router;
