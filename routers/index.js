@@ -33,7 +33,8 @@ const {
 
 const {
   getOrdenesServicio,
-  PostOrdenesServicio
+  PostOrdenesServicio,
+  DeleteOrdenesServicio
 } = require("../controlador/Ordenes_servicio");
 
 const {
@@ -67,9 +68,11 @@ router.get("/ordenCompraBySolci/:id_solicitud", getOrdenBySolicitud);
 router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total", postOrdenCompra);
 
 //Rutas de Ordenes de Servicio
-const jsonParser = bodyParser.json();
+/*const jsonParser = bodyParser.json();
+const json_2 = bodyParser.json();*/
 router.get("/ordenesServicio", getOrdenesServicio);
-router.post("/crearServicio", jsonParser, PostOrdenesServicio);
+router.post("/crearServicio", PostOrdenesServicio);
+router.delete("/borraOServicio/:id", DeleteOrdenesServicio);
 
 //Rutas de Clientes
 router.get("/IDclientes", getClienteIDs);
