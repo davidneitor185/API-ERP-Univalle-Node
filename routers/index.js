@@ -31,9 +31,18 @@ const {
   getOrdenes, 
   getArtOrden,
   postOrdenCompra,
-  getOrdenBySolicitud
+  getOrdenBySolicitud,
+  getOrden,
+  postOrdenArt
 } = require("../controlador/ordenes_c");
 const pool = require("../controlador/conexion");
+
+const {
+  getProveedores,
+} = require("../controlador/proveedor");
+
+//Rutas de proveedor
+router.get("/proveedores", getProveedores);
 
 // Rutas de funcionario
 router.get("/funcionarios", getFuncionario);
@@ -60,7 +69,9 @@ router.put("/orden_c/:id_orden_compra/:estado", putOrdenEstado);
 router.get("/ordenes", getOrdenes);
 router.get("/orde_art/:id_orden_c", getArtOrden);
 router.get("/ordenCompraBySolci/:id_solicitud", getOrdenBySolicitud);
-router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total", postOrdenCompra);
+router.post("/crear_orden", postOrdenCompra);
+router.get("/orden_compra/:id_orden", getOrden);
+router.post("/crear_orden_art", postOrdenArt);
 
 
 module.exports = router;

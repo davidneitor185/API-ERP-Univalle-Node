@@ -21,7 +21,22 @@ const getOrdenes= async (req, res) => {
     try {
       const response = await pool.query(
         `SELECT *,orden_compra.estado as est FROM orden_compra
-        join solicitud_interna on orden_compra.id_solicitud = solicitud_interna.id_solicitud`
+        join solicitud_interna on orden_compra.id_solicitud = solicitud_interna.id_solicitud
+        NATURAL JOIN  proveedor`
+      );
+      res.send(response.rows);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getOrden= async (req, res) => {
+    try {
+      let id_orden = req.params.id_orden;
+      const response = await pool.query(
+        `SELECT * FROM orden_compra
+        NATURAL JOIN  proveedor
+        WHERE id_orden_compra = ${id_orden}`
       );
       res.send(response.rows);
     } catch (e) {
@@ -58,17 +73,42 @@ const getOrdenes= async (req, res) => {
 
 const postOrdenCompra = async(req, res) => {
   try {
-    var id_orden_compra = req.params.id_orden_compra;
-    var jefe_compra = req.params.jefe_compra;
-    var aprob_grte = req.params.aprob_grte;
-    var id_solicitud = req.params.id_solicitud;
-    var total = req.params.total;
-    var estado = req.params.estado;
+    var bd = req.body;
+    var jefe_compra = req.body.jefe_compra;
+    var id_solicitud = req.body.id_solicitud;
+    var total = req.body.total;
+    var estado = req.body.estado;
+    var id_proveedor = parseInt(req.body.id_proveedor);
 
       const response = await pool.query(
-        `INSERT INTO orden_compra VALUES (${id_orden_compra}, ${jefe_compra}, ${aprob_grte}, ${id_solicitud}, ${total})`
+        `INSERT INTO public.orden_compra(
+          jefe_compra, id_solicitud, total, estado, id_proveedor)
+          VALUES (${jefe_compra}, ${id_solicitud}, ${total}, '${estado}',${id_proveedor})
+          RETURNING id_orden_compra`
       );
       res.send(response.rows);
+      
+  }catch(e) {
+    console.log(e);
+  }
+};
+
+const postOrdenArt = async(req, res) => {
+  try {
+    
+    var id_orden_compra = req.body.id_orden_compra;
+    var id_articulo = req.body.id_articulo;
+    var precio = parseInt(req.body.precio);
+    var tiempo_llegada = req.body.tiempo_llegada;
+
+    
+     const response = await pool.query(
+        `INSERT INTO public.orden_articulo(
+          id_orden_c, id_articulo, precio, tiempo_llegada)
+          VALUES (${id_orden_compra}, ${id_articulo}, ${precio}, '${tiempo_llegada}')`
+      );
+      res.send(response.rows);
+      
   }catch(e) {
     console.log(e);
   }
@@ -80,5 +120,7 @@ module.exports = {
     getOrdenes,
     getArtOrden,
     postOrdenCompra,
-    getOrdenBySolicitud
+    getOrdenBySolicitud,
+    getOrden,
+    postOrdenArt
 };
