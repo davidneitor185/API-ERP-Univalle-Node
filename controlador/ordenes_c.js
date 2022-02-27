@@ -29,6 +29,18 @@ const getOrdenes= async (req, res) => {
     }
   };
 
+  //Trae SOLO las órdenes de compra
+  const getSoloOrden = async (req, res) =>{
+    try {
+      const response = await pool.query(
+      `SELECT "id_orden_compra" FROM "orden_compra"`
+      );
+      res.send(response.rows);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const getArtOrden= async (req, res) => {
     const id_orden_c = req.params.id_orden_c;
     try {
@@ -80,5 +92,6 @@ module.exports = {
     getOrdenes,
     getArtOrden,
     postOrdenCompra,
-    getOrdenBySolicitud
+    getOrdenBySolicitud,
+    getSoloOrden
 };
