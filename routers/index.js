@@ -30,6 +30,11 @@ const {
 } = require("../controlador/cuentaxpagar");
 
 const {
+  putDatosM,
+  getDatosM
+} = require("../controlador/datos_maestros");
+
+const {
   postDetaCobro
 } = require("../controlador/detalle_cobros");
 
@@ -82,6 +87,10 @@ router.get("/cuentaxpagar/todo", getCuentasxpagar);
 router.get("/cuentaxpagarFull/:id", getFullCtnxp);
 router.post("/cuentaxpagar", postCntxpagar);
 router.put("/cuentaxpagar/update/:id", putCtnxp);
+
+//Rutas de Datos Maestros
+router.get("/datosmaestros", getDatosM);
+router.put("/datosmaestros_put", putDatosM);
 
 //Rutas de Detalle Cobro
 router.post("/detalle_cobro/", postDetaCobro);
