@@ -23,7 +23,7 @@ const {
 } = require("../controlador/cuenta_contable");
 
 const {
-  getCuentasxpagar,
+  getCtxpR,
   postCntxpagar,
   getFullCtnxp,
   putCtnxp,
@@ -85,7 +85,7 @@ router.get("/cuenta_contable/todos", getCContables);
 router.put("/cuenta_contable/modifica", putCContables);
 
 // Rutas de Cuentas Por Pagar
-router.get("/cuentaxpagar/todo", getCuentasxpagar);
+router.get("/cuentaxpagar/todo", getCtxpR);
 router.get("/cuentaxpagarFull/:id", getFullCtnxp);
 router.post("/cuentaxpagar", postCntxpagar);
 router.put("/cuentaxpagar/update/:id", putCtnxp);

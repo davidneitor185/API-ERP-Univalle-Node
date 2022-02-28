@@ -72,10 +72,24 @@ const putTotal = async (req, res) =>{
   }
 };
 
+ const getCtxpR = async (req, res) =>{
+  try {
+    const response = await pool.query(
+      `SELECT * FROM cuentaxpagar left join recibo_pago
+       on cuentaxpagar.idcuentaxp = recibo_pago.cuentaxp
+        ORDER BY idcuentaxp ASC`
+    );
+    res.send(response.rows);
+  } catch (e) {
+    console.log(e);
+  }
+ };
+
   module.exports = {
     getCuentasxpagar,
     postCntxpagar,
     getFullCtnxp, 
     putCtnxp,
-    putTotal
+    putTotal,
+    getCtxpR
   };
