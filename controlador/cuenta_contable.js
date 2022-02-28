@@ -1,5 +1,15 @@
 const pool = require("./conexion");
 
+//Metodo get para las cuentas contables
+const getCuentaContable = async (req, res) => {
+	try {
+		const response = await pool.query(`select * from cuenta_contable`);
+		res.send(response.rows);
+	}catch(error) {
+		console.log(error);
+	}
+};
+
 const getCContables = async (req, res) => {
     try {
       const response = await pool.query(
@@ -32,5 +42,10 @@ const putCContables = async (req, res) =>{
 
 module.exports={
     getCContables,
-    putCContables
+    putCContables,
+	getCuentaContable
 };
+
+
+
+	
