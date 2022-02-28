@@ -14,9 +14,40 @@ const pool = require("./conexion");
     }
   };
 
+  const getElementos= async (req, res) => {
+    try {
+      
+      const response = await pool.query(
+        `SELECT * FROM elemento`
+      );
+      res.send(response.rows);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
+  const postelement= async (req, res) => {
+    try {
+  
+      const {
+        nombre, 
+        cantidad, 
+        id_solicitud        
+      } = req.body;
+      
+      const response = await pool.query(
+        `INSERT INTO public.elemento(
+           nombre, cantidad, id_solicitud)
+          VALUES ( '${nombre}', ${cantidad}, ${id_solicitud})`
+      );
+      res.send(response.rows);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
 module.exports = {
-  getElemento
-  
+  getElemento,
+  getElementos,
+  postelement  
 };

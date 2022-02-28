@@ -1,6 +1,7 @@
 const Router = require("express-promise-router");
 const bodyParser = require('body-parser');
 const router = new Router();
+const pool = require("../controlador/conexion");
 
 const {
   getFuncionario,
@@ -43,11 +44,15 @@ const {
 
 const {
   getSolicitudes,
-  getSolicitud
+  getSolicitud,
+  putSolicitud,
+  postSolicitud
 } = require("../controlador/solicitud");
 
 const {
-  getElemento
+  getElemento,
+  getElementos,
+  postelement
 } = require("../controlador/elemento");
 
 const {
@@ -65,7 +70,9 @@ const {
   getArtOrden,
   postOrdenCompra,
   getOrdenBySolicitud,
-  getSoloOrden
+  getSoloOrden,
+  getOrden,
+  postOrdenArt
 } = require("../controlador/ordenes_c");
 
 const {
@@ -90,12 +97,30 @@ const {
   postNomina
 } = require("../controlador/Nomina");
 
+
 const {
-  getCuentaContable
-} = require("../controlador/Cuenta_contable");
+  getProveedores,
+} = require("../controlador/proveedor");
 
-const pool = require("../controlador/conexion");
+const {
+  getCuentaContable,
+  getCuentaCont,
+  postCuentaCont
+} = require("../controlador/cuenta_contable");
 
+const {
+  getInvent,
+} = require("../controlador/inventario");
+
+//Rutas de inventario
+router.get("/inventario", getInvent);
+
+//Rutas de cuenta contable
+router.get("/cuenta_cont", getCuentaCont);
+router.post("/crear_cuenta", postCuentaCont);
+
+//Rutas de proveedor
+router.get("/proveedores", getProveedores);
 
 // Rutas de funcionario
 router.get("/funcionarios", getFuncionario);
@@ -131,9 +156,13 @@ router.post("/detalle_cobro/", postDetaCobro);
 // Rutas de Solicitudes
 router.get("/solicitudes", getSolicitudes);
 router.get("/solicitud/:id_solicitud", getSolicitud);
+router.put("/updatesolicitud/:id/:estado", putSolicitud);
+router.post("/postsolicitud", postSolicitud);
 
 //Rutas de Elementos
 router.get("/elemento/:id_solicitud", getElemento);
+router.get("/elementos", getElementos);
+router.post("/postelement", postelement);
 
 //Rutas de Proveedores
 router.get("/proveedor/todos", getProveedores);
@@ -148,7 +177,9 @@ router.get("/ordenes", getOrdenes);
 router.get("/orde_art/:id_orden_c", getArtOrden);
 router.get("/ordenCompraBySolci/:id_solicitud", getOrdenBySolicitud);
 router.get("/soloorden_c", getSoloOrden);
-router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total", postOrdenCompra);
+router.post("/crear_orden", postOrdenCompra);
+router.get("/orden_compra/:id_orden", getOrden);
+router.post("/crear_orden_art", postOrdenArt);
 
 //Rutas de Ordenes de Servicio
 /*const jsonParser = bodyParser.json();
