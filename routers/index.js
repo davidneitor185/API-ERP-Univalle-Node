@@ -45,6 +45,18 @@ const {
   PostServiciosOS
 } = require("../controlador/ServiciosOS");
 
+const {
+  getNominas,
+  getInfoNomina,
+  getPagosNomina,
+  postPagarNomina,
+  postNomina
+} = require("../controlador/Nomina");
+
+const {
+  getCuentaContable
+} = require("../controlador/Cuenta_contable");
+
 const pool = require("../controlador/conexion");
 
 
@@ -83,5 +95,16 @@ router.get("/IDclientes", getClienteIDs);
 
 //Rutas de Servicios
 router.post("/newServicios", PostServiciosOS);
+
+//Rutas de Nomina
+router.get("/nominas", getNominas);
+router.get("/nomina/:id", getInfoNomina);
+router.get("/pagosNomina", getPagosNomina);
+router.post("/pagarNomina", postPagarNomina);
+router.post("/addNomina", postNomina);
+
+//Rutas de Cuentas Contables
+router.get("/cuentaContable", getCuentaContable);
+
 
 module.exports = router;
