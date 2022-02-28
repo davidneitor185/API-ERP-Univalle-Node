@@ -99,10 +99,6 @@ const {
 
 
 const {
-  getProveedores,
-} = require("../controlador/proveedor");
-
-const {
   getCuentaContable,
   getCuentaCont,
   postCuentaCont
