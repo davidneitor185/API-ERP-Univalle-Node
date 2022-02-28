@@ -57,9 +57,25 @@ const putCtnxp = async (req, res) =>{
   }
 };
 
+const putTotal = async (req, res) =>{
+  const {
+    idcuentaxp,
+    cobroto
+  } = req.body;
+  try {
+    const response = await pool.query(
+      `update cuentaxpagar set cobroto = ${cobroto} where idcuentaxp = ${idcuentaxp}`
+      );
+    res.send(response.rows);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
   module.exports = {
     getCuentasxpagar,
     postCntxpagar,
     getFullCtnxp, 
-    putCtnxp
+    putCtnxp,
+    putTotal
   };

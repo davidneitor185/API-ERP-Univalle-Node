@@ -26,7 +26,8 @@ const {
   getCuentasxpagar,
   postCntxpagar,
   getFullCtnxp,
-  putCtnxp
+  putCtnxp,
+  putTotal
 } = require("../controlador/cuentaxpagar");
 
 const {
@@ -88,6 +89,7 @@ router.get("/cuentaxpagar/todo", getCuentasxpagar);
 router.get("/cuentaxpagarFull/:id", getFullCtnxp);
 router.post("/cuentaxpagar", postCntxpagar);
 router.put("/cuentaxpagar/update/:id", putCtnxp);
+router.put("/cuentaxpagar/update", putTotal);
 
 //Rutas de Datos Maestros
 router.get("/datosmaestros", getDatosM);
