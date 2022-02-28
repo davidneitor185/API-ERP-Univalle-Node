@@ -31,7 +31,8 @@ const {
 
 const {
   putDatosM,
-  getDatosM
+  getDatosM,
+  getJoinPagoTercero
 } = require("../controlador/datos_maestros");
 
 const {
@@ -90,6 +91,7 @@ router.put("/cuentaxpagar/update/:id", putCtnxp);
 
 //Rutas de Datos Maestros
 router.get("/datosmaestros", getDatosM);
+router.get("/datosmaestros_join_terceros", getJoinPagoTercero);
 router.put("/datosmaestros_put", putDatosM);
 
 //Rutas de Detalle Cobro

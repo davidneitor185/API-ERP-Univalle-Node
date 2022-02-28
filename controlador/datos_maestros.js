@@ -29,4 +29,18 @@ const putDatosM = async (req, res) =>{
     }
   };
 
-module.exports = { putDatosM, getDatosM };
+  const getJoinPagoTercero = async (req, res) =>{
+    try {
+      const response = await pool.query(
+        `select cuenta_contable.idcuentactle, cuenta_contable.entidadbancaria, cuenta_contable.numerocuenta,
+        cuenta_contable.montototal
+        from datos_maestros
+        inner join cuenta_contable on cuenta_contable.idcuentactle = datos_maestros.pagot`
+      );
+      res.send(response.rows);
+    } catch (error) {
+      console.log(e);
+    }
+  };
+
+module.exports = { putDatosM, getDatosM, getJoinPagoTercero };
