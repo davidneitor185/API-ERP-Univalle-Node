@@ -1,4 +1,5 @@
 const Router = require("express-promise-router");
+const bodyParser = require('body-parser');
 const router = new Router();
 
 const {
@@ -66,7 +67,35 @@ const {
   getOrdenBySolicitud,
   getSoloOrden
 } = require("../controlador/ordenes_c");
+
+const {
+  getOrdenesServicio,
+  PostOrdenesServicio,
+  DeleteOrdenesServicio
+} = require("../controlador/Ordenes_servicio");
+
+const {
+  getClienteIDs
+} = require("../controlador/Clientes");
+
+const {
+  PostServiciosOS
+} = require("../controlador/ServiciosOS");
+
+const {
+  getNominas,
+  getInfoNomina,
+  getPagosNomina,
+  postPagarNomina,
+  postNomina
+} = require("../controlador/Nomina");
+
+const {
+  getCuentaContable
+} = require("../controlador/Cuenta_contable");
+
 const pool = require("../controlador/conexion");
+
 
 // Rutas de funcionario
 router.get("/funcionarios", getFuncionario);
@@ -120,6 +149,29 @@ router.get("/orde_art/:id_orden_c", getArtOrden);
 router.get("/ordenCompraBySolci/:id_solicitud", getOrdenBySolicitud);
 router.get("/soloorden_c", getSoloOrden);
 router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total", postOrdenCompra);
+
+//Rutas de Ordenes de Servicio
+/*const jsonParser = bodyParser.json();
+const json_2 = bodyParser.json();*/
+router.get("/ordenesServicio", getOrdenesServicio);
+router.post("/crearServicio", PostOrdenesServicio);
+router.delete("/borraOServicio/:id", DeleteOrdenesServicio);
+
+//Rutas de Clientes
+router.get("/IDclientes", getClienteIDs);
+
+//Rutas de Servicios
+router.post("/newServicios", PostServiciosOS);
+
+//Rutas de Nomina
+router.get("/nominas", getNominas);
+router.get("/nomina/:id", getInfoNomina);
+router.get("/pagosNomina", getPagosNomina);
+router.post("/pagarNomina", postPagarNomina);
+router.post("/addNomina", postNomina);
+
+//Rutas de Cuentas Contables
+router.get("/cuentaContable", getCuentaContable);
 
 
 module.exports = router;

@@ -2,6 +2,7 @@ const express =  require('express');
 const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 
 app.use(cors());
@@ -18,7 +19,6 @@ app.use(require('./routers/index'));
 //settings
 app.set('port',process.env.PORT || 5000) ;
 app.set('json spaces', 2);
-
 
 
 //starting server
