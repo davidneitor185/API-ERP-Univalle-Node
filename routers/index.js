@@ -41,6 +41,22 @@ const {
   getProveedores,
 } = require("../controlador/proveedor");
 
+const {
+  getCuentaCont,
+  postCuentaCont
+} = require("../controlador/cuenta_contable");
+
+const {
+  getInvent,
+} = require("../controlador/inventario");
+
+//Rutas de inventario
+router.get("/inventario", getInvent);
+
+//Rutas de cuenta contable
+router.get("/cuenta_cont", getCuentaCont);
+router.post("/crear_cuenta", postCuentaCont);
+
 //Rutas de proveedor
 router.get("/proveedores", getProveedores);
 
