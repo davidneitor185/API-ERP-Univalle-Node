@@ -33,16 +33,21 @@ const {
 
 const {
   getOrdenesServicio,
+  getOsEmpleado,
   PostOrdenesServicio,
-  DeleteOrdenesServicio
+  DeleteOrdenesServicio,
+  putEstadoOS,
+  editOS
 } = require("../controlador/Ordenes_servicio");
 
 const {
-  getClienteIDs
+  getClienteIDs,
+  getClientes
 } = require("../controlador/Clientes");
 
 const {
-  PostServiciosOS
+  getServiciosOS,
+  postServiciosOS
 } = require("../controlador/ServiciosOS");
 
 const {
@@ -50,14 +55,27 @@ const {
   getInfoNomina,
   getPagosNomina,
   postPagarNomina,
-  postNomina
+  postNomina,
+  deleteNomina
 } = require("../controlador/Nomina");
 
 const {
-  getCuentaContable
+  getCuentaContable,
+  getCuentaCont,
+  postCuentaCont
 } = require("../controlador/Cuenta_contable");
 
+const {
+  getItems
+} = require("../controlador/item");
+
+
 const pool = require("../controlador/conexion");
+
+
+//Rutas de cuenta contable
+router.get("/cuenta_cont", getCuentaCont);
+router.post("/crear_cuenta", postCuentaCont);
 
 
 // Rutas de funcionario
@@ -65,16 +83,20 @@ router.get("/funcionarios", getFuncionario);
 router.get("/funcionarioID/:id_funcionario", getFuncionariobyID);
 router.post("/funcionario", postFuncionario);
 
+
 // Rutas de cuenta
 router.get("/cuenta/:email/:contrasena", getCuenta);
 router.get("/cuentas", getCuentas);
+
 
 // Rutas de Solicitudes
 router.get("/solicitudes", getSolicitudes);
 router.get("/solicitud/:id_solicitud", getSolicitud);
 
+
 //Rutas de Elementos
 router.get("/elemento/:id_solicitud", getElemento);
+
 
 //Rutas de Ordenes de compra
 router.put("/orden_c/:id_orden_compra/:estado", putOrdenEstado);
@@ -83,18 +105,28 @@ router.get("/orde_art/:id_orden_c", getArtOrden);
 router.get("/ordenCompraBySolci/:id_solicitud", getOrdenBySolicitud);
 router.post("/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total", postOrdenCompra);
 
+
+//Rutas de Items
+router.get("/items", getItems);
+
 //Rutas de Ordenes de Servicio
-/*const jsonParser = bodyParser.json();
-const json_2 = bodyParser.json();*/
 router.get("/ordenesServicio", getOrdenesServicio);
+router.get("/osEmpleado/:empleado", getOsEmpleado);
 router.post("/crearServicio", PostOrdenesServicio);
 router.delete("/borraOServicio/:id", DeleteOrdenesServicio);
+router.put("/editStateOS", putEstadoOS);
+router.put("/editOS", editOS);
+
 
 //Rutas de Clientes
 router.get("/IDclientes", getClienteIDs);
+router.get("/clientes", getClientes);
+
 
 //Rutas de Servicios
-router.post("/newServicios", PostServiciosOS);
+router.get("/serviciosOS", getServiciosOS);
+router.post("/newServicios", postServiciosOS);
+
 
 //Rutas de Nomina
 router.get("/nominas", getNominas);
@@ -102,6 +134,8 @@ router.get("/nomina/:id", getInfoNomina);
 router.get("/pagosNomina", getPagosNomina);
 router.post("/pagarNomina", postPagarNomina);
 router.post("/addNomina", postNomina);
+router.delete("/deleteNomina/:id", deleteNomina);
+
 
 //Rutas de Cuentas Contables
 router.get("/cuentaContable", getCuentaContable);
