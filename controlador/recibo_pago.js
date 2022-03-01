@@ -3,7 +3,7 @@ const pool = require("./conexion");
 const getRecibos = async (req, res) =>{
  try {
      const response = await pool.query(
-         `SELECT * FROM recibo_pago ORDEr BY cuentaxp ASC`
+         `SELECT * FROM recibo_pago ORDER BY idrecibo ASC`
      );
      res.send(response.rows);
  } catch (e) {
