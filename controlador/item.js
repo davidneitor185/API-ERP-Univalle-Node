@@ -14,6 +14,19 @@ const postItem = async (req, res) => {
     }
 };
 
+const getItems = async (req, res) => {
+    try {
+        const response = await pool.query(
+            `SELECT * FROM item`
+        );
+        res.send(response.rows);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+
 module.exports = {
-    postItem
+    postItem,
+    getItems
 };

@@ -11,7 +11,8 @@ const {
 } = require("../controlador/funcionario");
 
 const {
-  postItem
+  postItem,
+  getItems
 } = require("../controlador/item");
 
 const {
@@ -106,10 +107,12 @@ const {
 
 const {
   getInvent,
+  postEntrada
 } = require("../controlador/inventario");
 
 //Rutas de inventario
 router.get("/inventario", getInvent);
+router.post("/postentrada", postEntrada);
 
 //Rutas de cuenta contable
 router.get("/cuenta_cont", getCuentaCont);
@@ -125,6 +128,7 @@ router.post("/funcionario", postFuncionario);
 
 // Rutas de Item
 router.post("/nuevoitem", postItem);
+router.get("/getitems", getItems);
 
 // Rutas de cuenta
 router.get("/cuenta/:email/:contrasena", getCuenta);
