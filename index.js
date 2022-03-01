@@ -3,8 +3,10 @@ const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
 
-
+//middlewares
 app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
 
 //routers
 app.use(require('./routers/index'));
@@ -13,9 +15,7 @@ app.use(require('./routers/index'));
 app.set('port',process.env.PORT || 5000) ;
 app.set('json spaces', 2);
 
-//middlewares
-app.use(morgan('dev'));
-app.use(express.json());
+
 //app.use(express.urlencoded({extended: false}));
 
 //starting server
