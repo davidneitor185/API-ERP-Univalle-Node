@@ -25,8 +25,8 @@ const postUsuario = async (req, res) => {
     );
     const insertCuenta = await pool.query(
       ` INSERT INTO cuenta (
-            id_rol, id_funcionario, contraseña)
-            VALUES ( ${rol}, ${response.rows[0].id_funcionario}, '${contra}') `
+            id_rol, id_funcionario, contraseña, acceso)
+            VALUES ( ${rol}, ${response.rows[0].id_funcionario}, '${contra}', 'Concedido') `
     );
 
     res.send("si llego");
@@ -76,10 +76,26 @@ const getUsuarios = async (req, res) => {
   }
 };
 
+const putAcceso = async (req, res) => {
+  try {
+    const {id_cuenta} = req.params;
+    const response = await pool.query(
+      `UPDATE cuenta SET
+      acceso = 'Denegado'
+      WHERE id_cuenta = ${id_cuenta}`
+    );
+    res.send("Se actualizo el acceso");
+  } catch (e) {
+    console.error(e);
+    res.status(400).send(e);
+  }
+}
+
 module.exports = {
   getUsuarioID,
   putUsuario,
   postUsuario,
 
   getUsuarios,
+  putAcceso,
 };

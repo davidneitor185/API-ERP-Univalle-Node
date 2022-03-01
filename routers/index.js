@@ -26,7 +26,7 @@ const { getRoles } = require("../controlador/roles");
 
 const { getJefes } = require("../controlador/jefes");
 
-const { getUsuarioID, putUsuario, postUsuario, getUsuarios } = require("../controlador/usuario");
+const { getUsuarioID, putUsuario, postUsuario, getUsuarios, putAcceso } = require("../controlador/usuario");
 
 const { getCuentasCobrar, getOrdenServicioCerrada, getDetallesCxC, getFechaLim, postCuentaCobrar, putCuentaCobrar } = require("../controlador/cuentasxCobrar");
 
@@ -67,6 +67,7 @@ router.get("/usuarioID/:id_funcionario", getUsuarioID);
 router.put("/modificar_usuario", putUsuario)
 router.post("/usuario", postUsuario);
 router.get("/usuarios", getUsuarios);
+router.put("/modificar_acceso/:id_cuenta", putAcceso);
 
 //Rutas de Cuentas x Cobrar
 router.get("/cuentasxcobrar", getCuentasCobrar);
