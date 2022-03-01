@@ -3,11 +3,11 @@ const bodyParser = require('body-parser');
 const router = new Router();
 const pool = require("../controlador/conexion");
 
+
 const {
   getFuncionario,
   getFuncionariobyID,
-  postFuncionario
-  
+  postFuncionario,
 } = require("../controlador/funcionario");
 
 const {
@@ -121,6 +121,14 @@ router.post("/crear_cuenta", postCuentaCont);
 //Rutas de proveedor
 router.get("/proveedores", getProveedores);
 
+const { getRoles } = require("../controlador/roles");
+
+const { getJefes } = require("../controlador/jefes");
+
+const { getUsuarioID, putUsuario, postUsuario, getUsuarios, putAcceso } = require("../controlador/usuario");
+
+const { getCuentasCobrar, getOrdenServicioCerrada, getDetallesCxC, getFechaLim, postCuentaCobrar, putCuentaCobrar } = require("../controlador/cuentasxCobrar");
+
 // Rutas de funcionario
 router.get("/funcionarios", getFuncionario);
 router.get("/funcionarioID/:id_funcionario", getFuncionariobyID);
@@ -203,6 +211,30 @@ router.post("/addNomina", postNomina);
 
 //Rutas de Cuentas Contables
 router.get("/cuentaContable", getCuentaContable);
+router.post(
+  "/crear_orden/:id_orden_compra/:jefe_compra/:aprob_grte/:id_solicitud/:total",
+  postOrdenCompra
+);
 
+//Rutas de Roles
+router.get("/roles", getRoles);
+
+//Rutas de Jefes
+router.get("/jefes", getJefes);
+
+//Rutas de Usuarios
+router.get("/usuarioID/:id_funcionario", getUsuarioID);
+router.put("/modificar_usuario", putUsuario)
+router.post("/usuario", postUsuario);
+router.get("/usuarios", getUsuarios);
+router.put("/modificar_acceso/:id_cuenta", putAcceso);
+
+//Rutas de Cuentas x Cobrar
+router.get("/cuentasxcobrar", getCuentasCobrar);
+router.get("/ordenservicioCxC", getOrdenServicioCerrada);
+router.get("/detalles/:id_cuentaxc", getDetallesCxC);
+router.get("/detalles/fechita", getFechaLim); 
+router.post("/cuentaxc" ,postCuentaCobrar);
+router.put("/actualizar_estado", putCuentaCobrar);
 
 module.exports = router;

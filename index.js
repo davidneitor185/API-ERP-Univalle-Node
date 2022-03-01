@@ -4,8 +4,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-
+//middlewares
 app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
 
 //middlewares
 app.use(morgan('dev'));
