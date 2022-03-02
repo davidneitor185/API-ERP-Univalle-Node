@@ -75,7 +75,7 @@ const postCuentaCont= async(req, res) => {
 module.exports={
     getCContables,
     putCContables,
-	getCuentaContable,
+	  getCuentaContable,
     getCuentaCont,
     postCuentaCont
 };

@@ -13,6 +13,19 @@ const getOrdenesServicio = async (req, res) => {
     }
 };
 
+//Metodo get para listar solo las ordenes de servicio de un empleado en particular
+const getOsEmpleado = async (req, res) => {
+    const empleado = req.params.empleado;
+    try {
+        const response = await pool.query(
+            `select * from OrdenServicio where empleadoasignado = ${empleado}` 
+        );
+        res.send(response.rows);
+    }catch(e) {
+        console.log(e);
+    }
+};
+
 //Metodo PUSH para agregar ordenes de Servicio
 const PostOrdenesServicio = async (req, res) => {
     try {
@@ -53,11 +66,54 @@ const DeleteOrdenesServicio = async (req, res) => {
     }catch(error) {
         console.log(error);
         res.send("No se ha borrado");
-    }
-}
+    };
+};
+
+
+//Metodo para editar las ordenes de servicio
+const editOS = async (req, res) => {
+    const idOS = req.body.idOrdenServicio;
+    const empleado = req.body.empleado;
+    const comentario = req.body.comentario;
+    const total = req.body.total;
+    const cliente = req.body.cliente;
+    const estado = req.body.estado;
+    
+
+    try {
+        const response = await pool.query(
+            `update ordenservicio 
+                set empleadoasignado = ${empleado}, comentarios = '${comentario}',
+                    costototal = ${total}, cliente = ${cliente}, estado = '${estado}'
+                where idordenservicio = ${idOS}`);
+        res.send(response.rows);
+        console.log("logre editarla :)");
+    }catch(error) {
+        console.log(error);
+    };
+};
+
+//Metodo para editar el estado de las ordenes de servicio
+const putEstadoOS = async (req, res) => {
+    const idOS = req.body.idOrdenServicio;
+    const estado = req.body.estado;
+    const comentario = req.body.comentario;
+
+    try {
+        const response = await pool.query(
+            `update ordenservicio set estado = '${estado}', 
+                comentariocierre = '${comentario}' where idordenservicio = ${idOS}`);
+        res.send(response.rows);
+    }catch(error) {
+        console.log(error);
+    };
+};
 
 module.exports = {
     getOrdenesServicio,
+    getOsEmpleado,
     PostOrdenesServicio,
-    DeleteOrdenesServicio
+    DeleteOrdenesServicio,
+    putEstadoOS,
+    editOS
 };

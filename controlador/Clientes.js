@@ -13,6 +13,20 @@ const getClienteIDs = async (req, res) => {
     }
 }
 
+//Metodo para consultar los clientes en la db
+const getClientes = async (req, res) => {
+    try {
+        const response = await pool.query(
+            "select * from cliente"
+        );
+
+        res.send(response.rows);
+    }catch(error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
-    getClienteIDs
+    getClienteIDs,
+    getClientes
 };
