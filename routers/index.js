@@ -5,7 +5,8 @@ const router = new Router();
 const {
   getFuncionario,
   getFuncionariobyID,
-  postFuncionario
+  postFuncionario,
+  addFuncionario
   
 } = require("../controlador/funcionario");
 
@@ -69,6 +70,16 @@ const {
   getItems
 } = require("../controlador/item");
 
+const {
+  getContrataciones,
+  addContrataciones,
+  deleteContratacion
+} = require("../controlador/contratacion");
+
+const {
+  getJefes
+} = require("../controlador/jefe");
+
 
 const pool = require("../controlador/conexion");
 
@@ -82,6 +93,7 @@ router.post("/crear_cuenta", postCuentaCont);
 router.get("/funcionarios", getFuncionario);
 router.get("/funcionarioID/:id_funcionario", getFuncionariobyID);
 router.post("/funcionario", postFuncionario);
+router.post("/addFuncionario", addFuncionario);
 
 
 // Rutas de cuenta
@@ -135,6 +147,15 @@ router.get("/pagosNomina", getPagosNomina);
 router.post("/pagarNomina", postPagarNomina);
 router.post("/addNomina", postNomina);
 router.delete("/deleteNomina/:id", deleteNomina);
+
+
+//Rutas de contratacion
+router.get("/contrataciones", getContrataciones);
+router.post("/addContratacion", addContrataciones);
+router.delete("/deleteContratacion/:idpersona", deleteContratacion);
+
+//Rutas de Jefes
+router.get("/jefes", getJefes);
 
 
 //Rutas de Cuentas Contables
