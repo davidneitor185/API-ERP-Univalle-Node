@@ -85,17 +85,17 @@ const {
   DeleteOrdenesServicio,
   putEstadoOS,
   editOS
-} = require("../controlador/Ordenes_servicio");
+} = require("../controlador/ordenes_servicio");
 
 const {
   getClienteIDs,
   getClientes
-} = require("../controlador/Clientes");
+} = require("../controlador/clientes");
 
 const {
   getServiciosOS,
   postServiciosOS
-} = require("../controlador/ServiciosOS");
+} = require("../controlador/servicios_os");
 
 const {
   getNominas,
@@ -104,7 +104,7 @@ const {
   postPagarNomina,
   postNomina,
   deleteNomina
-} = require("../controlador/Nomina");
+} = require("../controlador/nomina");
 
 
 const {
