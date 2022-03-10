@@ -111,7 +111,7 @@ const {
   getCuentaContable,
   getCuentaCont,
   postCuentaCont
-} = require("../controlador/cuenta_contable");
+} = require("../controlador/Cuenta_contable");
 
 const {
   getContrataciones,
