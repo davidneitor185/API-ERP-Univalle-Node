@@ -8,10 +8,6 @@ const bodyParser = require('body-parser');
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-
-//middlewares
-app.use(morgan('dev'));
-app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 //routers
